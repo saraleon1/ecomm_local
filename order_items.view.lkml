@@ -38,6 +38,24 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
   }
 
+  dimension: sale_price_format0 {
+    type: number
+    sql: ${TABLE}.sale_price ;;
+    value_format_name: usd_0
+  }
+
+  dimension: sale_price_format1 {
+    type: number
+    sql: ${TABLE}.sale_price ;;
+    value_format_name: usd
+  }
+
+  measure: items_id_list {
+    type: list
+    list_field: inventory_item_id
+  }
+
+
   measure: count {
     type: count
     drill_fields: [id, inventory_items.id, orders.id]

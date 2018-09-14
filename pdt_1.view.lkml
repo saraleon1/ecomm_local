@@ -1,10 +1,17 @@
-view: orders {
-  sql_table_name: demo_db.orders ;;
+view: pdt_1 {
+  derived_table: {
+    sql:
+        SELECT
+            *
+        FROM demo_db.orders;;
+  }
 
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    drill_fields: [id, users.first_name,users.last_name,created_date]
+
   }
 
   dimension_group: created {
@@ -45,12 +52,24 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+# #     html: <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ rendered_value }}</p>
+# ;;
   }
 
   dimension: user_id {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
+  }
+
+  measure: count {
+    type: count
+#     drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
+  }
+
+  measure: user_ordered_list {
+    type: list
+    list_field: user_id
   }
 
   dimension: case_param_dimension {
@@ -66,17 +85,5 @@ view: orders {
       }
       else: "Greater than or equal to 200"
     }
-  }
-
-  measure: count_distinct_of_user_ids {
-    type: count_distinct
-    sql: ${user_id} ;;
-
-    drill_fields: [user_id]
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
   }
 }

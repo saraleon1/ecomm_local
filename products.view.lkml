@@ -17,6 +17,11 @@ view: products {
     sql: ${TABLE}.category ;;
   }
 
+  dimension: is_male {
+    type: yesno
+    sql: ${TABLE}.department = 'Men' ;;
+  }
+
   dimension: department {
     type: string
     sql: ${TABLE}.department ;;

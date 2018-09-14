@@ -72,6 +72,26 @@ view: users {
     drill_fields: [detail*]
   }
 
+
+  dimension: perc_test_dim {
+    type: number
+    sql: ${age}/${id};;
+    value_format: "0.0%"
+  }
+
+  measure: perc_test_two {
+    type: number
+    sql: COUNT(distinct ${city})/COUNT(distinct ${id})-1;;
+    value_format: "+#,##0.00%;(#,##0.00%)"
+  }
+
+  measure: fake_decimal {
+    type: number
+    value_format: "0.0%"
+    sql: 1.0 * 55/100 ;;
+  }
+
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
