@@ -38,6 +38,25 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
   }
 
+  dimension: part_1 {
+    sql: case when {{_user_attributes['ubm_current_url']}} = "value1" then "value1"
+          when {{_user_attributes['ubm_current_url']}} = "value2"  then "value2"
+          else null end;;
+    hidden:yes
+  }
+
+  dimension: sitename {
+    label: "Site Name with Site Code"
+    type: string
+    sql: ${order_id} ;;
+    link: {
+      label: "Site & Account Details"
+      url:"https://{{part_1}}/SBOLDotNetReports/ProfileSelection.aspx?formaction=/SBOLDotNetReports/Webpages/SiteReports/SiteAccountsView.aspx&id_user=ENOC&idoption=18&p=2152&os=LIVE&site={{value}}"
+      icon_url: "https://www.{{part_1}}.com/SbolDotNetReports/images/favicon.ico"
+    }
+  }
+
+
   dimension: sale_price_format0 {
     type: number
     sql: ${TABLE}.sale_price ;;
