@@ -65,25 +65,37 @@ view: order_items {
 #     }
 #   }
 
+#   dimension: sitename {
+#     label: "Site Name with Site Code"
+#     type: string
+#     sql: ${order_id} ;;
+#     link: {
+#       label: "Site & Account Details"
+#       url:"https://{{_user_attributes['ubm_current_url']}}.looker.com/dashboards/451}"
+# #       icon_url: "https://www.{{part_1}}.com/SbolDotNetReports/images/favicon.ico"
+#     }
+#     }
+
+
   dimension: sitename {
     label: "Site Name with Site Code"
     type: string
     sql: ${order_id} ;;
     link: {
       label: "Site & Account Details"
-      url:"https://{{_user_attributes['ubm_current_url']}}.looker.com/dashboards/451}"
-#       icon_url: "https://www.{{part_1}}.com/SbolDotNetReports/images/favicon.ico"
+      url:"https://{{_user_attributes['ubm_current_url']}}.looker.com/dashboards/123"
+      icon_url: "https://{{_user_attributes['ubm_current_url']}}.looker.com/dashboards/123/images/favicon.ico"
     }
-    }
+  }
 
 
-  dimension: sale_price_format0 {
+  dimension: gpb {
     type: number
     sql: ${TABLE}.sale_price ;;
     value_format_name: usd_0
   }
 
-  dimension: sale_price_format1 {
+  dimension: usd {
     type: number
     sql: ${TABLE}.sale_price ;;
     value_format_name: usd
@@ -94,6 +106,10 @@ view: order_items {
     list_field: inventory_item_id
   }
 
+#   measure: sale_price_measure {
+#     type: number
+#     sql:
+#   }
 
   measure: count {
     type: count
