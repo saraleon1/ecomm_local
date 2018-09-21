@@ -54,16 +54,27 @@ view: order_items {
 #   <font color="darkred">{{ rendered_value }}</font>
 #   {% endif %} ;;
 
+#   dimension: sitename {
+#     label: "Site Name with Site Code"
+#     type: string
+#     sql: ${order_id} ;;
+#     link: {
+#       label: "Site & Account Details"
+#       url:"https://www.google.com/{{_user_attributes['ubm_current_url']}}"
+# #       icon_url: "https://www.{{part_1}}.com/SbolDotNetReports/images/favicon.ico"
+#     }
+#   }
+
   dimension: sitename {
     label: "Site Name with Site Code"
     type: string
     sql: ${order_id} ;;
     link: {
       label: "Site & Account Details"
-      url:"https://www.google.com/{{_user_attributes['ubm_current_url']}}"
+      url:"https://{{_user_attributes['ubm_current_url']}}.looker.com/dashboards/451}"
 #       icon_url: "https://www.{{part_1}}.com/SbolDotNetReports/images/favicon.ico"
     }
-  }
+    }
 
 
   dimension: sale_price_format0 {
