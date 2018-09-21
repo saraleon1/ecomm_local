@@ -109,10 +109,7 @@ view: order_items {
   measure: item_total_currency {
   type: number
   sql:
-        case
-        when {{_user_attributes['currency_type'] }} = gpb then ${TABLE}.sale_price
-        when {{ _user_attributes['currency_type'] }} = usd then ${TABLE}.returned_at
-        end;;
+        if( {{_user_attributes['currency_type'] }} = gpb, ${TABLE}.sale_price, ${TABLE}.returned_at);;
 }
 
   measure: count {
