@@ -38,12 +38,21 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
   }
 
-  dimension: part_1 {
-    sql: case when {{_user_attributes['ubm_current_url']}} = "value1" then "value1"
-          when {{_user_attributes['ubm_current_url']}} = "value2"  then "value2"
-          else null end;;
-    hidden:yes
-  }
+#   dimension: part_1 {
+#     sql: case when {{_user_attributes['ubm_current_url']}} = 'value1' then ${part_1} = 'something'
+#           when {{_user_attributes['ubm_current_url']}} != 'value1'  then ${part_1} = 'value2'
+#           else null end;;
+#     hidden:yes
+#   }
+
+#   html:
+#   {% if value > 100 %}
+#   <font color="darkgreen">{{ rendered_value }}</font>
+#   {% elsif value > 50 %}
+#   <font color="goldenrod">{{ rendered_value }}</font>
+#   {% else %}
+#   <font color="darkred">{{ rendered_value }}</font>
+#   {% endif %} ;;
 
   dimension: sitename {
     label: "Site Name with Site Code"
@@ -51,8 +60,8 @@ view: order_items {
     sql: ${order_id} ;;
     link: {
       label: "Site & Account Details"
-      url:"https://{{part_1}}/SBOLDotNetReports/ProfileSelection.aspx?formaction=/SBOLDotNetReports/Webpages/SiteReports/SiteAccountsView.aspx&id_user=ENOC&idoption=18&p=2152&os=LIVE&site={{value}}"
-      icon_url: "https://www.{{part_1}}.com/SbolDotNetReports/images/favicon.ico"
+      url:"https://www.google.com/{{_user_attributes['ubm_current_url']}}"
+#       icon_url: "https://www.{{part_1}}.com/SbolDotNetReports/images/favicon.ico"
     }
   }
 
