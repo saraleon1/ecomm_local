@@ -106,10 +106,14 @@ view: order_items {
     list_field: inventory_item_id
   }
 
-#   measure: sale_price_measure {
-#     type: number
-#     sql:
-#   }
+  measure: item_total_currency {
+  type: sum
+  sql:
+        case
+        when {{_user_attributes['currency_type'] }} = 'GBP' then ${TABLE}.sale_price
+        when {{ _user_attributes['currency_type'] }} = 'USD' then ${TABLE}.returned_at
+        end;;
+}
 
   measure: count {
     type: count
