@@ -107,11 +107,11 @@ view: order_items {
   }
 
   measure: item_total_currency {
-  type: sum
+  type: number
   sql:
         case
-        when {{_user_attributes['currency_type'] }} = 'GBP' then ${TABLE}.sale_price
-        when {{ _user_attributes['currency_type'] }} = 'USD' then ${TABLE}.returned_at
+        when {{_user_attributes['currency_type'] }} = gpb then ${TABLE}.sale_price
+        when {{ _user_attributes['currency_type'] }} = usd then ${TABLE}.returned_at
         end;;
 }
 
