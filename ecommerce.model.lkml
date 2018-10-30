@@ -33,6 +33,7 @@ explore: order_items {
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
+#     sql_where: ${order_items.inventory_item_id} > 1 ;;
     relationship: many_to_one
   }
 
@@ -86,3 +87,5 @@ explore: pdt_1 {}
 explore: user_facts {}
 
 explore: orders_extended {}
+
+explore: dt_sme_work {}

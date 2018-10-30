@@ -36,6 +36,11 @@ view: order_items {
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+#     html: {{order_items.returned_raw._value}} ;;
+  }
+
+  dimension: try_this {
+    sql: ${returned_time} ;;
   }
 
 #   dimension: part_1 {
@@ -105,12 +110,31 @@ view: order_items {
     type: list
     list_field: inventory_item_id
   }
-
+#
   measure: item_total_currency {
   type: number
+#   sql:
+#         if( {{_user_attributes['currency_type'] }} = gpb, ${TABLE}.sale_price, ${TABLE}.returned_at);;
   sql:
-        if( {{_user_attributes['currency_type'] }} = gpb, ${TABLE}.sale_price, ${TABLE}.returned_at);;
+    CASE
+      WHEN '{{_user_attributes['currency_type'] }}' = 'gbp' THEN ${order_id}
+      ELSE ${sale_price}
+    END
+    ;;
 }
+#
+# parameter: currency_selection {
+#    {{_user_attributes['currency_type'] }};;
+
+
+#    measure: item_total_currency {
+#     type: number
+#     sql:
+#       case
+#         when {% parameter currency_selection %} = 'gbp' then ${order_id}
+#         when {% parameter currency_selection %} = 'usd' then ${sale_price}
+#       end;;
+#       }
 
   measure: count {
     type: count

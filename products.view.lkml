@@ -47,6 +47,17 @@ view: products {
     sql: ${TABLE}.sku ;;
   }
 
+  dimension: foo {
+    type: string
+    hidden: yes
+    sql: ${TABLE}.sku ;;
+  }
+
+  filter: filter_on_foo {
+    type: string
+    sql: {% condition filter_on_foo %} ${foo} {% endcondition %} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, item_name, inventory_items.count]

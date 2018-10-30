@@ -24,6 +24,7 @@ view: inventory_items {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    html:<b><center><p style="background-color:#44AEA5;"><font size = "13" color="#800000"> {{ rendered_value | date: "%b %d, %y" }} </font> </p> </center></b>;;
   }
 
   dimension: product_id {
@@ -49,5 +50,7 @@ view: inventory_items {
   measure: count {
     type: count
     drill_fields: [id, products.item_name, products.id, order_items.count]
+    html:<b><center><p style="background-color:#44AEA5;"><font size = "10" color="#5B44AE"><a href="#drillmenu" target="_self"> {{ rendered_value | append: "% anything? can go in here?" | truncatewords: 5, " WORKING?" | split: "" | reverse | join: "" }} </a> </font> </p> </center></b>;;
+
   }
 }
