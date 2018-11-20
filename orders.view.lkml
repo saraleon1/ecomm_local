@@ -78,5 +78,36 @@ view: orders {
   measure: count {
     type: count
     drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
+    html: <div style="float: left
+    ; width:{{ value | times:100}}%
+    ; background-color: rgba(0,180,0,{{ value | times:100 }})
+    ; text-align:left
+    ; color: #FFFFFF
+    ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 4px;">{{ value | times:100 }}%</p>
+    </div>
+    <div style="float: left
+    ; width:{{ 1| minus:value | times:100}}%
+    ; background-color: rgba(0,180,0,0.1)
+    ; text-align:right
+    ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 0px; color:rgba(0,0,0,0.0" )>{{value}}</p>
+    </div>
+    ;;
+  }
+
+  measure: percent_complete {type: number sql: (1/100)*(${user_id});;
+    html: <div style="float: left
+          ; width:{{ value | times:100}}%
+          ; background-color: rgba(0,180,0,{{ value | times:100 }})
+          ; text-align:left
+          ; color: #FFFFFF
+          ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 4px;">{{ value | times:100 }}%</p>
+          </div>
+          <div style="float: left
+          ; width:{{ 1| minus:value | times:100}}%
+          ; background-color: rgba(0,180,0,0.1)
+          ; text-align:right
+          ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 0px; color:rgba(0,0,0,0.0" )>{{value}}</p>
+          </div>
+      ;;
   }
 }
