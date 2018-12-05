@@ -45,6 +45,15 @@ view: events {
 set: test {
   fields: [value, user_id, type_id]
 }
+
+  set: test2 {
+    fields: [test*, -value]
+  }
+
+
+  set: test3 {
+    fields: [test*, -test2*]
+  }
 }
 
 # This is hella broken
