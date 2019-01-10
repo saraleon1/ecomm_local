@@ -13,31 +13,6 @@ view: orders {
       raw,
       time,
       date,
-<<<<<<< HEAD
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.created_at ;;
-  }
-
-  dimension: status {
-    type: string
-    sql: ${TABLE}.status ;;
-  }
-
-  dimension: user_id {
-    type: number
-    # hidden: yes
-    sql: ${TABLE}.user_id ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
-    html: {{ users.id._rendered_value }} of total ;;
-=======
       hour,
       day_of_month,
       week,
@@ -134,6 +109,5 @@ view: orders {
           ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 0px; color:rgba(0,0,0,0.0" )>{{value}}</p>
           </div>
       ;;
->>>>>>> branch 'master' of git@github.com:saraleon1/ecomm_local.git
   }
 }

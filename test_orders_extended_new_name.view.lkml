@@ -1,7 +1,7 @@
 include: "*.view.lkml"
 
 view: orders_extended {
-  extends: [orders]
+#   extends: [orders]
 
   dimension: id {
   }

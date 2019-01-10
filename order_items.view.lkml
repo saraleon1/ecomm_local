@@ -15,31 +15,6 @@ view: order_items {
 
   dimension: order_id {
     type: number
-<<<<<<< HEAD
-    value_format: "0.00\%"
-    # hidden: yes
-    sql: ${TABLE}.order_id/100000 ;;
-  }
-
-  dimension_group: returned {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.returned_at ;;
-  }
-
-  dimension: sale_price {
-    type: number
-    sql: ${TABLE}.sale_price ;;
-  }
-=======
     # hidden: yes
     sql: ${TABLE}.order_id ;;
   }
@@ -147,7 +122,6 @@ view: order_items {
     END
     ;;
 }
-#
 # parameter: currency_selection {
 #    {{_user_attributes['currency_type'] }};;
 
@@ -160,7 +134,6 @@ view: order_items {
 #         when {% parameter currency_selection %} = 'usd' then ${sale_price}
 #       end;;
 #       }
->>>>>>> branch 'master' of git@github.com:saraleon1/ecomm_local.git
 
   measure: count {
     type: count
