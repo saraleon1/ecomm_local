@@ -3,12 +3,15 @@ connection: "thelook"
 # include all the views
 include: "*.view"
 
-datagroup: sara_leon_ecommerce_git_test_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
+# include all the dashboards
+include: "*.dashboard"
 
-persist_with: sara_leon_ecommerce_git_test_default_datagroup
+# datagroup: ecommerce_default_datagroup {
+#   # sql_trigger: SELECT MAX(id) FROM etl_log;;
+#   max_cache_age: "1 hour"
+# }
+
+# persist_with: ecommerce_default_datagroup
 
 explore: events {
   join: users {
@@ -30,6 +33,7 @@ explore: order_items {
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
+#     sql_where: ${order_items.inventory_item_id} > 1 ;;
     relationship: many_to_one
   }
 
@@ -65,29 +69,23 @@ explore: products {}
 explore: schema_migrations {}
 
 explore: user_data {
-#   join: users {
-#     type: left_outer
-#     sql_on: ${user_data.user_id} = ${users.id} ;;
-#     relationship: many_to_one
-#   }
+  join: users {
+    type: left_outer
+    sql_on: ${user_data.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
 }
 
-# explore: users {
-# #   join: users_ext {
-# #     sql: ${users.id} = ${users_ext.id} ;;
-# #     relationship: one_to_one
-# #     fields: [users_ext.id, users_ext.zip]
-# #   }
-# }
+explore: users {}
 
-# explore: users_nn {
-# #   join: other_table {
-# #     sql_on: ${users_nn.id} = ${users_nn.id} ;;
-# #     type: left_outer
-# #     relationship: many_to_one
-# #   }
-# }
+explore: users_nn {}
 
-datagroup: test_datagroup {
-  sql_trigger: select curdate() ;;
-}
+explore: ndt_1 {}
+
+explore: pdt_1 {}
+
+explore: user_facts {}
+
+explore: orders_extended {}
+
+explore: dt_sme_work {}

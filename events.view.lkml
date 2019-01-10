@@ -41,4 +41,23 @@ view: events {
     type: count
     drill_fields: [id, users.first_name, users.last_name, users.id]
   }
+<<<<<<< HEAD
 }
+=======
+
+set: test {
+  fields: [value, user_id, type_id]
+}
+
+  set: test2 {
+    fields: [test*, -value]
+  }
+
+
+  set: test3 {
+    fields: [test*, -test2*]
+  }
+}
+
+# This is hella broken
+>>>>>>> branch 'master' of git@github.com:saraleon1/ecomm_local.git
