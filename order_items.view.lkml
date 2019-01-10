@@ -111,17 +111,17 @@ view: order_items {
     list_field: inventory_item_id
   }
 #
-  measure: item_total_currency {
-  type: number
+#   measure: item_total_currency {
+#   type: number
+# #   sql:
+# #         if( {{_user_attributes['currency_type'] }} = gpb, ${TABLE}.sale_price, ${TABLE}.returned_at);;
 #   sql:
-#         if( {{_user_attributes['currency_type'] }} = gpb, ${TABLE}.sale_price, ${TABLE}.returned_at);;
-  sql:
-    CASE
-      WHEN '{{_user_attributes['currency_type'] }}' = 'gbp' THEN ${order_id}
-      ELSE ${sale_price}
-    END
-    ;;
-}
+#     CASE
+#       WHEN '{{_user_attributes['currency_type'] }}' = 'gbp' THEN ${order_id}
+#       ELSE ${sale_price}
+#     END
+#     ;;
+# }
 # parameter: currency_selection {
 #    {{_user_attributes['currency_type'] }};;
 
