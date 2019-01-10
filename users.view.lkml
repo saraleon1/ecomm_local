@@ -63,8 +63,9 @@ view: users {
   }
 
   dimension: zip {
-    type: zipcode
+    type: number
     sql: ${TABLE}.zip ;;
+    value_format: "00000"
   }
 
   measure: count {
@@ -83,4 +84,17 @@ view: users {
       user_data.count
     ]
   }
-}
+ }
+#
+# view: users_ext {
+#   extends: [users]
+#
+#   measure: test {
+#     type: number
+#     sql: 1=1 ;;
+#     filters: {
+#       field: users_ext.zip
+#       value: "this week"
+#     }
+#   }
+# }

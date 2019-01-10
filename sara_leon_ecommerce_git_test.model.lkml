@@ -72,9 +72,21 @@ explore: user_data {
   }
 }
 
-explore: users {}
+explore: users {
+#   join: users_ext {
+#     sql: ${users.id} = ${users_ext.id} ;;
+#     relationship: one_to_one
+#     fields: [users_ext.id, users_ext.zip]
+#   }
+}
 
-explore: users_nn {}
+explore: users_nn {
+  join: other_table {
+    sql_on: ${users_nn.id} = ${users_nn.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+}
 
 datagroup: test_datagroup {
   sql_trigger: select curdate() ;;
