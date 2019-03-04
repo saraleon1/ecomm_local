@@ -13,11 +13,27 @@ view: order_items {
     sql: ${TABLE}.inventory_item_id ;;
   }
 
+  parameter: points_from_date {
+    type: date
+    default_value: "after 2018/03/31"
+  }
+
   dimension: order_id {
     type: number
+    group_label: "group_label_test"
     # hidden: yes
     sql: ${TABLE}.order_id ;;
+    html: {% if value < order_items.inventory_item_id._value %}
+    <p style="color: red">{{ rendered_value }} </p>
+    {% else %}
+    <p style="color: green">{{ rendered_value }}</p>
+    {% endif %} ;;
   }
+
+dimension: test_datetime {
+  type: date_time
+  sql: ${TABLE}.returned_at ;;
+}
 
   dimension_group: returned {
     type: time
@@ -28,18 +44,27 @@ view: order_items {
       week,
       month,
       quarter,
-      year
+      year,
+      millisecond
     ]
+    label: "test"
     sql: ${TABLE}.returned_at ;;
   }
 
+  dimension: returned_date_test {
+    sql: ${returned_date} ;;
+    html:<font color="pink">{{ rendered_value | "%m/%d/%Y" }} </font> ;;
+  }
+
   dimension: sale_price {
+    label: "1_sale_price"
     type: number
     sql: ${TABLE}.sale_price ;;
 #     html: {{order_items.returned_raw._value}} ;;
   }
 
   dimension: try_this {
+    label: "2_try_this"
     sql: ${returned_time} ;;
   }
 
@@ -110,6 +135,26 @@ view: order_items {
     type: list
     list_field: inventory_item_id
   }
+
+  measure: orderidcount {
+    type: count
+    sql: ${order_id} ;;
+  }
+
+  measure: test {
+    type: yesno
+    sql: ${orderidcount} > 3 ;;
+  }
+
+  measure: status6 {
+#hidden: yes
+    type: date
+    sql: (case when ${id}=6 then MAX(${returned_date_test}) OVER(PARTITION BY ${id} ORDER BY ${returned_date_test} end);;
+  }
+
+
+
+
 #
 #   measure: item_total_currency {
 #   type: number

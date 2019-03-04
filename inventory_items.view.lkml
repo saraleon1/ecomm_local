@@ -12,6 +12,27 @@ view: inventory_items {
     sql: ${TABLE}.cost ;;
   }
 
+  measure: cost_measure {
+    type: number
+    sql: ${TABLE}.cost;;
+  }
+
+  parameter: date_part {
+    type: date
+    allowed_value: {
+      label: "Oct 5"
+      value: "2018-10-05"
+    }
+
+  }
+
+  dimension: created_date_trunc {
+    type: date
+    sql: {% parameter date_part %};;
+    group_label: "Created Date"
+    convert_tz: no
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -21,7 +42,8 @@ view: inventory_items {
       week,
       month,
       quarter,
-      year
+      year,
+      day_of_year
     ]
     sql: ${TABLE}.created_at ;;
     html:<b><center><p style="background-color:#44AEA5;"><font size = "13" color="#800000"> {{ rendered_value | date: "%b %d, %y" }} </font> </p> </center></b>;;

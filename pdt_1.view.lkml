@@ -1,4 +1,6 @@
+include: "orders.view"
 view: pdt_1 {
+  extends: [orders]
   derived_table: {
     sql:
         SELECT

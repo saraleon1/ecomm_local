@@ -1,5 +1,25 @@
+include: "users.view.lkml"
 view: orders {
   sql_table_name: demo_db.orders ;;
+  extends: [users]
+
+  parameter: test {
+      type: unquoted
+      allowed_value: {value:"a"}
+      allowed_value: {value:"b"}
+      default_value: "b"
+    }
+
+    label: "{% if test._parameter_value == 'a' %} A
+    {% elsif test._parameter_value == 'b' %} B
+    {% else %} C {% endif %} Change in Base"
+
+
+  dimension: test_text{
+    type: string
+    sql: 1=1 ;;
+    html: <h1> test if this works </h1> ;;
+  }
 
   dimension: id {
     primary_key: yes
@@ -37,6 +57,7 @@ view: orders {
               END;;
   }
 
+
   measure: first_order {
     type: date_time
     sql: min(${created_raw}) ;;
@@ -45,6 +66,11 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+  }
+
+  dimension: test_string {
+    type: string
+    sql: concat(${status}, ' ', ${city}) ;;
   }
 
   dimension: user_id {
@@ -67,6 +93,14 @@ view: orders {
       else: "Greater than or equal to 200"
     }
   }
+
+
+dimension: bracket {
+  type: tier
+  tiers: [0,50,100,500,1000, 10000]
+  style: integer
+  sql: ${user_id} ;;
+}
 
   measure: count_distinct_of_user_ids {
     type: count_distinct

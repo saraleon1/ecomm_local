@@ -12,6 +12,14 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+  dimension: age_tier {
+    type: tier
+    tiers: [10, 18, 25, 40, 55, 65, 75, 90, 110]
+    style: integer
+    sql: ${age} ;;
+    tags: ["groupID"]
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
