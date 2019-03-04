@@ -5,6 +5,7 @@ view: users {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    tags: ["user_id"]
   }
 
   dimension: age {
@@ -17,7 +18,7 @@ view: users {
     tiers: [10, 18, 25, 40, 55, 65, 75, 90, 110]
     style: integer
     sql: ${age} ;;
-    tags: ["groupID"]
+    tags: ["group_id"]
   }
 
   dimension: city {
@@ -48,11 +49,13 @@ view: users {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
+    tags: ["email"]
   }
 
   dimension: first_name {
     type: string
     sql: ${TABLE}.first_name ;;
+    tags: ["first_name"]
   }
 
   dimension: gender {
@@ -63,6 +66,7 @@ view: users {
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;
+    tags: ["last_name"]
   }
 
   dimension: state {
