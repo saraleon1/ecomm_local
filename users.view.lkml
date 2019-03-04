@@ -18,7 +18,7 @@ view: users {
     tiers: [10, 18, 25, 40, 55, 65, 75, 90, 110]
     style: integer
     sql: ${age} ;;
-    tags: ["groupId"]
+    tags: ["segment_group_id"]
   }
 
   dimension: city {
