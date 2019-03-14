@@ -3,12 +3,13 @@ view: products {
 
   dimension: id {
     primary_key: yes
-    type: number
+    type: string
     sql: ${TABLE}.id ;;
   }
 
   dimension: brand {
     type: string
+    required_access_grants: [test_for_chat]
     sql: ${TABLE}.brand ;;
   }
 
@@ -19,6 +20,7 @@ view: products {
 
   dimension: department {
     type: string
+    label: "more testing"
     sql: ${TABLE}.department ;;
   }
 
@@ -34,6 +36,7 @@ view: products {
 
   dimension: retail_price {
     type: number
+    value_format: "$#,##0"
     sql: ${TABLE}.retail_price ;;
   }
 

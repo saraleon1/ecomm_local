@@ -6,6 +6,11 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+access_grant: test_for_chat {
+  user_attribute: sara_test_chat
+  allowed_values: ["Test"]
+}
+
 # datagroup: ecommerce_default_datagroup {
 #   # sql_trigger: SELECT MAX(id) FROM etl_log;;
 #   max_cache_age: "1 hour"
@@ -64,7 +69,12 @@ include: "*.dashboard"
 #   }
 # }
 
-explore: products {}
+# explore: products {
+# #   access_filter: {
+# #     field: products.id
+# #     user_attribute: sara_test_chat
+# #   }
+# }
 
 explore: schema_migrations {}
 
@@ -76,7 +86,9 @@ explore: user_data {
   }
 }
 
-explore: users {}
+explore: users {
+#   required_access_grants: [test_for_chat]
+}
 
 explore: users_nn {}
 

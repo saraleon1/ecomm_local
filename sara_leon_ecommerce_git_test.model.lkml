@@ -8,6 +8,12 @@ datagroup: sara_leon_ecommerce_git_test_default_datagroup {
   max_cache_age: "1 hour"
 }
 
+access_grant: test_for_chat {
+  user_attribute: sara_test_chat
+  allowed_values: ["Test"]
+}
+
+
 persist_with: sara_leon_ecommerce_git_test_default_datagroup
 
 explore: events {
