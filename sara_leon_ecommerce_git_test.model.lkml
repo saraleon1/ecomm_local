@@ -2,6 +2,7 @@ connection: "thelook"
 
 # include all the views
 include: "*.view"
+include: "test_dashboard.dashboard"
 
 datagroup: sara_leon_ecommerce_git_test_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -17,6 +18,7 @@ access_grant: test_for_chat {
 persist_with: sara_leon_ecommerce_git_test_default_datagroup
 
 explore: events {
+  description: "This data is filtered using the user attribute value <font>{{ _user_attributes['email'] }}</font>"
   join: users {
     type: left_outer
     sql_on: ${events.user_id} = ${users.id} ;;
@@ -33,15 +35,24 @@ explore: inventory_items {
 }
 
 explore: order_items {
+  label: "1234test"
+  group_label: "test model filter"
+}
+
+explore: order_items2 {
+  from: order_items
+  view_label: "order_items2"
+
   join: inventory_items {
     type: left_outer
-    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
+    sql_on: ${order_items2.inventory_item_id} = ${inventory_items.id} ;;
     relationship: many_to_one
   }
 
   join: orders {
     type: left_outer
-    sql_on: ${order_items.order_id} = ${orders.id} ;;
+    view_label: "order_items2"
+    sql_on: ${order_items2.order_id} = ${orders.id} ;;
     relationship: many_to_one
   }
 
@@ -93,7 +104,7 @@ explore: user_data {
 # #     relationship: many_to_one
 # #   }
 # }
-
+explore: products2 {}
 datagroup: test_datagroup {
   sql_trigger: select curdate() ;;
 }

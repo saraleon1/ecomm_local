@@ -5,6 +5,7 @@ view: events {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    drill_fields: [users.id]
   }
 
   dimension_group: created {

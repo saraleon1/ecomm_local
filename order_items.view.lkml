@@ -7,6 +7,18 @@ view: order_items {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: image_test {
+    type: string
+    sql: cast("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFk3tqiOgqRXbRKItsgpF8V8Oltcqghh6k9FJD3TA8zQhK06eh" as char);;
+#     html: <center><img src="{{value}}" width = "40" /></center> ;;
+    html:  <div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange"> {{value}}
+</div> ;;
+  }
+
+
+
+
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -49,6 +61,7 @@ dimension: test_datetime {
     ]
     label: "test"
     sql: ${TABLE}.returned_at ;;
+    suggestable: yes
   }
 
   dimension: returned_date_test {
@@ -138,7 +151,7 @@ dimension: test_datetime {
 
   measure: orderidcount {
     type: count
-    sql: ${order_id} ;;
+    # sql : ${order_id} ;;
   }
 
   measure: test {

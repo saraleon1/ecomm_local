@@ -4,7 +4,7 @@ view: orders {
   extends: [users]
 
   parameter: test {
-      type: unquoted
+      type: string
       allowed_value: {value:"a"}
       allowed_value: {value:"b"}
       default_value: "b"
@@ -15,6 +15,10 @@ view: orders {
     {% else %} C {% endif %} Change in Base"
 
 
+  dimension: test_param {
+    type: string
+    sql: {% parameter test %} ;;
+  }
   dimension: test_text{
     type: string
     sql: 1=1 ;;
@@ -26,6 +30,7 @@ view: orders {
     type: number
     sql: ${TABLE}.id ;;
   }
+
 
   dimension_group: created {
     type: time
@@ -108,6 +113,19 @@ dimension: bracket {
 
     drill_fields: [user_id]
   }
+
+
+measure: count_not_california {
+label: "Count of Users from States other than California"
+type: count
+filters: {
+field: state
+value: "-California"
+}
+filters: {
+  field: state
+  value: "-Michigan"}
+}
 
   measure: count {
     type: count

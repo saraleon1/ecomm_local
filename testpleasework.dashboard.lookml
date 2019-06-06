@@ -46,6 +46,7 @@
     x_axis_reversed: false
     y_axis_reversed: false
     plot_size_by_field: false
+    query_timezone: user_timezone
     ordering: none
     show_null_labels: false
     show_totals_labels: false
@@ -74,7 +75,7 @@
       products.brand: ''
     sorts: [orders.count desc 0, products.brand, products.department]
     limit: 5
-    query_timezone: America/Los_Angeles
+    query_timezone: user_timezone
     stacking: ''
     show_value_labels: true
     label_density: 25

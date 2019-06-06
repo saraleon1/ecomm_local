@@ -81,8 +81,19 @@ explore: schema_migrations {}
 explore: user_data {
   join: users {
     type: left_outer
+    view_label: "Account Information"
     sql_on: ${user_data.user_id} = ${users.id} ;;
     relationship: many_to_one
+    fields: [-user_data.id]
+  }
+  join: user_data2 {
+    from:  user_data
+    view_label: "Account Information"
+    type: left_outer
+    sql_on: ${user_data.user_id} = ${users.id} ;;
+    relationship: many_to_one
+#we take the opportunity value to save the join
+    fields: [user_data2.max_num_orders]
   }
 }
 

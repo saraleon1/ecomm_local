@@ -26,6 +26,12 @@ view: users {
     sql: ${TABLE}.city ;;
   }
 
+
+  filter: testing {
+    type: string
+    suggest_dimension: city
+  }
+
   dimension: country {
     type: string
     map_layer_name: countries
@@ -83,8 +89,8 @@ view: users {
   measure: count {
     type: count
     drill_fields: [detail*]
+    link: {label: "Explore Top 20 Results by Sale Price" url: "https://dcleu.eu.looker.com/looks/134?toggle=fil,pik" }
   }
-
 
   dimension: perc_test_dim {
     type: number

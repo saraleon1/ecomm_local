@@ -14,7 +14,9 @@ view: products2 {
 
   dimension: category {
     type: string
-    sql: ${TABLE}.category ;;
+    sql: (CASE
+            WHEN (${is_male}) = 'Yes' THEN concat(products2.category, " Warning")
+        END);;
   }
 
   dimension: is_male {
@@ -55,6 +57,7 @@ view: products2 {
 
   filter: filter_on_foo {
     type: string
+    label: "test name"
     sql: {% condition filter_on_foo %} ${foo} {% endcondition %} ;;
   }
 

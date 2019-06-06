@@ -7,12 +7,16 @@ view: inventory_items {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    value_format: "\"CA\" $#,##0.00"
+
+#     html: <font size = "13"> {{ rendered_value }} </font>;;
   }
 
   dimension: cost {
     type: number
 #     required_access_grants: [test_for_chat]
     sql: ${TABLE}.cost ;;
+    drill_fields: [product.brand]
   }
 
   measure: cost_measure {
@@ -36,6 +40,11 @@ view: inventory_items {
     convert_tz: no
   }
 
+  dimension: date_test_ticket {
+    type: date
+    sql: ${TABLE}.created_at ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -49,7 +58,7 @@ view: inventory_items {
       day_of_year
     ]
     sql: ${TABLE}.created_at ;;
-    html:<b><center><p style="background-color:#44AEA5;"><font size = "13" color="#800000"> {{ rendered_value | date: "%b %d, %y" }} </font> </p> </center></b>;;
+    html:<b><center><p style="background-color:#44AEA5;"><font size = "2" color="#800000"> {{ rendered_value | date: "%b %d, %y" }} </font> </p> </center></b>;;
   }
 
   dimension: product_id {
@@ -70,6 +79,16 @@ view: inventory_items {
       year
     ]
     sql: ${TABLE}.sold_at ;;
+  }
+
+  dimension: test_user {
+    sql: 1=1;;
+    html: Hello {{ _user_attributes['first_name'] }} , welcome to Looker! ;;
+  }
+
+  measure: test_measure {
+    type: number
+    sql:( ${product_id} * ${cost} ) + ( ${cost_measure} * 0 )  ;;
   }
 
   measure: count {
