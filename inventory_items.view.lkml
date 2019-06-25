@@ -33,6 +33,10 @@ view: inventory_items {
 
   }
 
+  parameter: parameter_test {
+    default_value: "last 3 months"
+  }
+
   dimension: created_date_trunc {
     type: date
     sql: {% parameter date_part %};;
@@ -45,6 +49,10 @@ view: inventory_items {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: yesnotest {
+    type: yesno
+#     sql: CASE WHEN {% parameter parameter_test %} = "last 3 months" THEN ${created_date} < (DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE())-3, 0)) ;;
+  }
   dimension_group: created {
     type: time
     timeframes: [
@@ -58,7 +66,7 @@ view: inventory_items {
       day_of_year
     ]
     sql: ${TABLE}.created_at ;;
-    html:<b><center><p style="background-color:#44AEA5;"><font size = "2" color="#800000"> {{ rendered_value | date: "%b %d, %y" }} </font> </p> </center></b>;;
+#     html:<b><center><p style="background-color:#44AEA5;"><font size = "2" color="#800000"> {{ rendered_value | date: "%b %d, %y" }} </font> </p> </center></b>;;
   }
 
   dimension: product_id {

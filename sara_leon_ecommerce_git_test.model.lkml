@@ -14,6 +14,9 @@ access_grant: test_for_chat {
   allowed_values: ["Test"]
 }
 
+datagroup: test_datagroup {
+  sql_trigger: select max(date(timestamp)) from pdt_event_log  ;;
+}
 
 persist_with: sara_leon_ecommerce_git_test_default_datagroup
 
@@ -105,6 +108,3 @@ explore: user_data {
 # #   }
 # }
 explore: products2 {}
-datagroup: test_datagroup {
-  sql_trigger: select curdate() ;;
-}

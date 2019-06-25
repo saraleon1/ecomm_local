@@ -4,8 +4,8 @@ view: orders {
   extends: [users]
 
   parameter: test {
-      type: string
-      allowed_value: {value:"a"}
+      type: unquoted
+      allowed_value: {value:"\"a\""}
       allowed_value: {value:"b"}
       default_value: "b"
     }
