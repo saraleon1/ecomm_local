@@ -4,7 +4,7 @@ view: events {
   dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.id2 ;;
     drill_fields: [users.id]
   }
 
