@@ -105,7 +105,7 @@ explore: users_nn {}
 
 # explore: ndt_1 {}
 
-explore: pdt_1 {}
+# explore: pdt_1 {}
 
 explore: user_facts {}
 
