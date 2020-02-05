@@ -42,6 +42,31 @@ view: order_items {
     {% endif %} ;;
   }
 
+  dimension: first_one {
+    type: number
+    sql: ${TABLE}.order_id / ${TABLE}.order_id ;;
+    html: {% if order_items.yesnofortest._value == 'Yes' %}
+              <p style="background-color: lightblue">{{rendered_value}}</p>
+        {% endif %};;
+  }
+
+  dimension: second_one {
+    type: number
+    sql: ${TABLE}.order_id ;;
+    html: {% if order_items.yesnofortest._value == 'Yes' %}
+            <p style="background-color: lightblue">{{rendered_value}}</p>
+          {% endif %};;
+  }
+
+  dimension: yesnofortest {
+    type: yesno
+    sql: ${first_one} = ${second_one} ;;
+    html: {% if value == 'Yes' %}
+            <p style="background-color: lightblue">{{rendered_value}}</p>
+          {% endif %};;
+  }
+
+
 dimension: test_datetime {
   type: date_time
   sql: ${TABLE}.returned_at ;;
