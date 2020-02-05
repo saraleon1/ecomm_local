@@ -5,7 +5,7 @@ view: user_facts {
         *
       FROM orders
       GROUP BY user_id
-      LIMIT 100
+      LIMIT 92
       ;;
   }
 
