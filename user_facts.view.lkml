@@ -8,7 +8,6 @@ view: user_facts {
         , MIN(orders.created_at) as first_purchase_at
         , DATEDIFF(now(), first_purchase_at) as days_since_first_purchase
         , lifetime_orders > 1 as is_repeat_customer
-        , TIMESTAMPDIFF(MONTH, first_purchase_at, now()) as months_since_first_purchase
       FROM orders
       GROUP BY user_id
       ;;
