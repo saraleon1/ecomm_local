@@ -1,5 +1,6 @@
 view: user_facts {
   derived_table: {
+    sql_trigger_value: SELECT CURDATE() ;;
     sql: SELECT
         user_id as user_id
         , COUNT(*) as lifetime_orders
