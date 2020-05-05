@@ -7,6 +7,7 @@ view: user_facts {
       GROUP BY user_id
       LIMIT 92
       ;;
+      indexes: ["id"]
   }
 
   dimension: user_id {}
